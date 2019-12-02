@@ -59,7 +59,10 @@ lr = 0.1
 
 list_input = []
 array_output = []
-list_error = []
+list_error_4 = []
+list_error_1 = []
+list_error_2 = []
+list_error_3 = []
 
 #Printing all the values
 
@@ -95,7 +98,13 @@ for i in range(epochs):
     d_hidden_layer = error_hidden_layer * sigmoid_derivation(hidden_layer_output)
 
     list_input.append(i)
-    list_error.append(error_hidden_layer)
+    #print(error)
+    #list_error.append((expect_output[0]+expect_output[1]+expect_output[2]+expect_output[3]) - (predicted_output[0]+predicted_output[1]+predicted_output[2]+predicted_output[3]))
+    list_error_1.append( expect_output[0] - predicted_output[0])
+    list_error_2.append(expect_output[1] - predicted_output[1])
+    list_error_3.append(expect_output[2] - predicted_output[2])
+    list_error_4.append(expect_output[3] - predicted_output[3])
+    
     #list_input.insert(i-1,i)
     #list_error.insert(i-1,error_hidden_layer)
     
@@ -121,9 +130,21 @@ print()
 print("Final Output from the network after 10,000 epoch iteration: ",end='')
 print(*predicted_output)
 
-x = np.array(list_input)
-y= np.array(list_error)
+x0 = np.array(list_input)
+y0= np.array(list_error_1)
+
+x1 = np.array(list_input)
+y1= np.array(list_error_2)
+
+x2 = np.array(list_input)
+y2= np.array(list_error_3)
+
+x3 = np.array(list_input)
+y3= np.array(list_error_4)
     
-#plt.plot(list_input,list_error)
-plt.plot(x,y)
-plt.show
+# red dashes, blue squares and green triangles
+#plt.plot(x0, y0, 'r--', x1, y1, 'b--', x2, y2, 'g--', x3,y3,'o--')
+plt.plot(x0, y0, 'r--', x2, y2, 'g--')
+plt.xlabel('Epoch')
+plt.ylabel('Error')
+plt.show()
